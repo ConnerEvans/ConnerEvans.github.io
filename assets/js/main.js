@@ -229,7 +229,7 @@ window.addEventListener('load', async function () {
 			file_button.href = "cluster_file_creation.html";
 	
 			button_width = document.getElementById("button_width");
-			button_width.className = "col-10-xsmall col-10-small col-8-medium col-6";
+			button_width.className = "col-9-xsmall col-9-small col-7-medium col-5";
 	
 		} else {
 			for (let i = 0; i < 5; i++) {
