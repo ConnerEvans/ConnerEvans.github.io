@@ -314,7 +314,7 @@ window.addEventListener('load', async function () {
   
         if (isMobileDevice) {
 			mobile_warning = document.getElementById("mobile warning");
-            mobile_warning.innerHTML  = "This display will not work for mobile devices. Please use a computer.";
+            mobile_warning.innerHTML  = "In order to properly see the clusters, please hold your phone horizontally.<br><br>";
         }
 
 		if (cluster_files[active_file_idx][VISUALIZE_CLUSTERS_FLAG] == 1) {
