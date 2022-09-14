@@ -185,22 +185,30 @@
 })(jQuery);
 
 
-// Structure for cluster files
-NAME = 0
-CLUSTER_TYPE = 1
-COMPARISON_ARRAY = 2
-CALCULATED_CLUSTERS = 3
 
-// Structure for the Comparison Array
-SIMILARITY = 0
-ITEM_1 = 1
-ITEM_2 = 2
+/////////////////////////////////////// CLUSTERING ////////////////////////////////////////////
+
+// Structure for cluster files
+NAME = 0;
+CLUSTER_TYPE = 1;
+COMPARISON_ARRAY = 2;
+CALCULATED_CLUSTERS = 3;
+VISUALIZE_CLUSTERS_FLAG = 4;
+
+// Structure for the comparison array
+SIMILARITY = 0;
+ITEM_1 = 1;
+ITEM_2 = 2;
+
+// Structure for the calculated clusters
+INDICATORS = 0;
+CLUSTERS = 1;
 
 // Recorded Similarities
-NO_INPUT = 0
-SIMILAR = 1
-NOT_SIMILAR = 2
-COMPLETELY_DIFFERENT = 3
+NO_INPUT = 0;
+SIMILAR = 1;
+NOT_SIMILAR = 2;
+COMPLETELY_DIFFERENT = 3;
 
 
 let cluster_files;
@@ -282,63 +290,119 @@ window.addEventListener('load', async function () {
 
 		num_comparisons = document.getElementById("num_comparisons");
 		len = cluster_files[active_file_idx][COMPARISON_ARRAY].length;
-		num_comparisons.innerHTML = "You have made "+num_compared+" comparisons. You will need to make about " + parseInt(3.4*(len-20)**.72).toString() + ".";
+		num_comparisons.innerHTML = "You have made "+num_compared+" comparisons. You will need to make at least about " + parseInt(3.5*(len-20)**.72).toString() + ", but the more you add, the more accurate the clustering will be.";
+
+		if (cluster_files[active_file_idx][CALCULATED_CLUSTERS].length > 0) {
+			vis_button = document.getElementById("previous visualization");
+			vis_button.innerHTML = "Previous Visualization";
+			vis_button.className = "button fit";
+			vis_button.onclick = async function () { visualize_previous_clusters(); };
+		}
+	
+	} else if (page == "cluster_visualization.html") {
+		/* Storing user's device details in a variable*/
+        let details = navigator.userAgent;
+  
+        /* Creating a regular expression 
+        containing some mobile devices keywords 
+        to search it in details string*/
+        let regexp = /android|iphone|kindle|ipad/i;
+  
+        /* Using test() method to search regexp in details
+        it returns boolean value*/
+        let isMobileDevice = regexp.test(details);
+  
+        if (isMobileDevice) {
+			mobile_warning = document.getElementById("mobile warning");
+            mobile_warning.innerHTML  = "This display will not work for mobile devices. Please use a computer.";
+        }
+
+		if (cluster_files[active_file_idx][VISUALIZE_CLUSTERS_FLAG] == 1) {
+			visualize_clusters();
+		}
+
+		text_input = document.getElementById("data");
+		text_input.addEventListener("keyup", async function(event) {
+			if (event.key === "Enter") {
+				data = text_input.value.trim().split(' ; ');
+				active_file_idx = Number(data[0]);
+				indicators = data[1].slice(1,data[1].length-1).split(', ').map(i=>Number(i));
+
+				clusters_string = data[2].slice(1,data[2].length-1).split('], [');
+				clusters_string[0] = clusters_string[0].slice(1,clusters_string[0].length)
+				last_idx = clusters_string.length - 1;
+				clusters_string[last_idx] = clusters_string[last_idx].slice(0,clusters_string[last_idx].length-1);
+				clusters = clusters_string.map(list => list.split(', ').map(i=>Number(i)))
+				
+				cluster_files[active_file_idx][CALCULATED_CLUSTERS] = [];
+				cluster_files[active_file_idx][CALCULATED_CLUSTERS].push(indicators);
+				cluster_files[active_file_idx][CALCULATED_CLUSTERS].push(clusters);
+
+				localStorage.setItem('cluster_files', JSON.stringify(cluster_files));
+
+				visualize_clusters();
+			}
+		});
 	}
 })
 
-text_input = document.getElementById("data");
-text_input.addEventListener("keyup", async function(event) {
-    if (event.key === "Enter") {
-		data = text_input.value.trim().split(' ; ');
-		cluster_type = data[0];
-		indicators = data[1].slice(1,data[1].length-1).split(', ').map(i=>Number(i));
 
-		clusters_string = data[2].slice(1,data[2].length-1).split('], [');
-		clusters_string[0] = clusters_string[0].slice(1,clusters_string[0].length)
-		last_idx = clusters_string.length - 1;
-		clusters_string[last_idx] = clusters_string[last_idx].slice(0,clusters_string[last_idx].length-1);
-		clusters = clusters_string.map(list => list.split(', ').map(i=>Number(i)))
-		
+async function visualize_clusters(){
+	indicators = cluster_files[active_file_idx][CALCULATED_CLUSTERS][INDICATORS];
+	clusters  = cluster_files[active_file_idx][CALCULATED_CLUSTERS][CLUSTERS];
 
-		num_clusters = indicators.length - 1;
-		first_col = 6 - Math.floor(num_clusters/2);
+	num_clusters = indicators.length - 1;
+	first_col = 6 - Math.floor(num_clusters/2);
 
-		if (indicators[0]==1) {
-			col = document.getElementById("col"+(first_col + num_clusters + 1).toString());
-			col_string = "";
-			for (let item_i = 0; item_i < clusters[cluster_i].length; item_i++) {
-				col_string = col_string + items[clusters[0][item_i]].toUpperCase() + "<br>";
-			}
-			col.innerHTML = col_string;
+	temp = await fetch("./assets/csv/"+cluster_files[active_file_idx][CLUSTER_TYPE]+".csv").then(res=>{return res.text()});
+	items = temp.replace(/"/g, '').split('\n');
 
-			first_col = first_col - 2
+	if (indicators[0]==1) {
+		col = document.getElementById("col"+(first_col + num_clusters + 1).toString());
+		col_string = "";
+		for (let item_i = 0; item_i < clusters[cluster_i].length; item_i++) {
+			col_string = col_string + items[clusters[0][item_i]].toUpperCase() + "<br>";
 		}
-		
-		temp = await fetch("./assets/csv/"+cluster_type+".csv").then(res=>{return res.text()});
-		items = temp.replace(/"/g, '').split('\n');
+		col.innerHTML = col_string;
 
-		for (let cluster_i = 1; cluster_i < num_clusters + 1; cluster_i++) {
-			col = document.getElementById("col"+(first_col + cluster_i).toString());
-			col_string = "";
-			for (let item_i = 0; item_i < clusters[cluster_i].length; item_i++) {
-				item = items[clusters[cluster_i][item_i]]
-				if (clusters[cluster_i][item_i] == indicators[cluster_i]) {
-					item = item.toUpperCase()
-				}
-				col_string = col_string + item + "<br>";	
+		first_col = first_col - 2
+	}
+
+	for (let cluster_i = 1; cluster_i < num_clusters + 1; cluster_i++) {
+		col = document.getElementById("col"+(first_col + cluster_i).toString());
+		col_string = "";
+		for (let item_i = 0; item_i < clusters[cluster_i].length; item_i++) {
+			item = items[clusters[cluster_i][item_i]]
+			if (clusters[cluster_i][item_i] == indicators[cluster_i]) {
+				item = item.toUpperCase()
 			}
-			col.innerHTML = col_string;
+			col_string = col_string + item + "<br>";	
 		}
+		col.innerHTML = col_string;
+	}
 
 
+	data_input = document.getElementById("data input");
+	data_input.remove();
 
-		data_input = document.getElementById("data input");
-		data_input.remove();
+	explanation = document.getElementById("explanation");
+	explanation.innerHTML = "This is the clustering that emerged given your input.<br>" +
+	"The clusters are ordered from left to right so that the clusters most different from each other are furthest apart. " +
+	"Similarly the items within each cluster are orderd from top to bottom so that the items that are the most different are the furthest apart. " +
+	"For clusters with three or more items, the item that most exemplifies the cluster is capitalized.";
 
-		explanation = document.getElementById("explanation");
-		explanation.innerHTML = "This is the clustering that emerged given your input.<br>The clusters are ordered from left to right so that the clusters most different from each other are furthest apart. Similarly the items within each cluster are orderd from top to bottom so that the items that are the most different are the furthest apart. For clusters with three or more items, the item that most exemplifies the cluster is capitalized."
-    }
-});
+
+	cluster_files[active_file_idx][VISUALIZE_CLUSTERS_FLAG] = 0;
+	localStorage.setItem('cluster_files', JSON.stringify(cluster_files));
+}
+
+
+function visualize_previous_clusters(){
+	cluster_files[active_file_idx][VISUALIZE_CLUSTERS_FLAG] = 1;
+	localStorage.setItem('cluster_files', JSON.stringify(cluster_files));
+
+	window.open("cluster_visualization.html", "_self");
+}
 
 
 function add_new_cluster(type){
@@ -367,12 +431,13 @@ function add_new_cluster(type){
 		}
 	}
 
-	calculated_clusters = null;
+	calculated_clusters = [];
 
 	file.push(file_name);
 	file.push(cluster_type);
 	file.push(comparison_array);
 	file.push(calculated_clusters);
+	file.push(0); // set VISUALIZE_CLUSTERS_FLAG to 0
 
 	cluster_files.push(file);
 	localStorage.setItem('cluster_files', JSON.stringify(cluster_files));
@@ -436,7 +501,7 @@ function input_similarity(similarity){
 
 function copy_data(){
 	data = Array();
-	data.push('"'+cluster_files[active_file_idx][CLUSTER_TYPE]+'"');
+	data.push(active_file_idx);
 
 	for(var i = 0; i < cluster_files[active_file_idx][COMPARISON_ARRAY].length; i++) {
 		data.push(cluster_files[active_file_idx][COMPARISON_ARRAY][i][SIMILARITY]);
@@ -444,3 +509,7 @@ function copy_data(){
 
 	navigator.clipboard.writeText(data);
 }
+
+
+
+/////////////////////////////////////// EXPECTED GROWTH ////////////////////////////////////////////
