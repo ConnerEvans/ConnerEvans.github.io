@@ -160,7 +160,7 @@ input, select, textarea {
 		-ms-transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		text-decoration: none;
-		color: #ff0000;
+		color: var(--primary_text);
 		border-bottom: dotted 1px var(--highlight);
 	}
 
@@ -274,6 +274,23 @@ input, select, textarea {
 		letter-spacing: 0em;
 		line-height: 1.0em;
 		color: var(--primary_text);
+	}
+
+	.h9 {
+		font-size: 3.0em;
+		margin: -1.2em 0 .1em 0;
+		letter-spacing: 0.05em;
+		font-weight: 700;
+		text-transform: capitalize;
+		color: var(--primary_text);
+		text-align: center;
+	}
+
+	.center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 50%;
 	}
 
 	br {
@@ -2443,13 +2460,13 @@ input, select, textarea {
 	}
 
 		table tbody tr {
-			border: solid 1px #ff0000;
+			border: solid 1px var(--primary_text);
 			border-left: 0;
 			border-right: 0;
 		}
 
 			table tbody tr:nth-child(2n + 1) {
-				background-color: #ff0000;
+				background-color: var(--tile_text);
 			}
 
 		table td {
