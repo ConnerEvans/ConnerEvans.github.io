@@ -63,7 +63,7 @@
 									<br>
 									Seems simple so far; if I walked up to you on the street and gave you this opportunity,
 									mathematically you should make the bet. But what if I gave you $100 for your 'bankroll' and said you can
-									bet on a coinflip with +120 odds as many times you want? The only stipulation is that 
+									bet on a coin flip with +120 odds as many times you want? The only stipulation is that 
 									you have to use that $100 or money made off previous bets, you cannot add external
 									money to your bankroll. This doesn't seem like that bad of a stipulation. 
 									Actually, this situation seems even better than the first hypothetical because you can make as many 
@@ -89,7 +89,7 @@
 									<br>&nbsp;<br>&nbsp;<br>
 
 									Let's look at another simple case. Let's keep betting half of whatever you have left.
-									Looking below, we can notice a couple things. Unfortunately, the most likely outcome
+									Looking below, we can notice several things. Unfortunately, the most likely outcome
 									is that you lose money. This can, again, be explained by the concentration of value
 									gained when you are lucky. 
 									<br>
@@ -125,7 +125,7 @@
 									\[\lim_{N \to \infty}\sum_{i=1}^{N}{\frac{{x}_{i}}{N}} = \bar{x}\]
 
 									So maybe you get lucky with your first 10 and get 7 heads, a proportion of 0.7! 
-									If you have average luck on your next 90 coinflips, your overall total would be 52 or a proportion of 0.52. 
+									If you have average luck on your next 90 coin flips, your overall total would be 52 or a proportion of 0.52. 
 									And the more you bet, the higher the likelihood will be that your rate of success
 									is close to the true probability, which, in this case, is 0.5. So, if you make this bet 100 times, 
 									this is the most like outcome:\[G = $100{(1.6)}^{50}{(0.5)}^{50} = $0.0014\]
@@ -133,54 +133,54 @@
 									This may be off by a few orders of magnitude depending on how lucky you are,
 									but if you keep betting, the law of large numbers will have its way\(^{*}\).
 									<br>
-									\(^{*}\)One common misunderstanding is the gamblers fallacy which assumes that 
+									\(^{*}\)One common misunderstanding is the gambler's fallacy which assumes that 
 									'nature' will 'purposefully' compensate for what the luck has been so far,
 									but a more accurate way to think about it is, however lucky you are on the
 									first 10 flips will be drowned out by your luck on the next 1,000 flips which
-									will be drown out by the luck on your next 1,000,000 flips. 
-									And with more flips the distribution of outcomes is much narrower:
+									will be drowned out by the luck on your next 1,000,000 flips. 
+									And with more flips, the distribution of outcomes is much narrower:
 									it is very common to get 6 heads out of 10, but basically impossible to get
 									600 heads out of 1000.
 									<br>
-									Understanding the law of large numbers is very important because, in the short run,
-									it feels like you can get lucky and realize the good Expected Value, 
-									but in the long run you will neither be very lucky or very unlucky. 
+									Understanding the law of large numbers is very important because - in the short run -
+									it feels like you can get lucky and realize the good Expected Value. 
+									However, in the long run you will neither be very lucky nor very unlucky. 
 									We can use this to our advantage, or to our detriment.
 									<br>&nbsp;<br>&nbsp;<br>
 
-									Now we can create a formula for average expected growth ratio. If total number of attempts
+									Now we can create a formula for the average expected growth ratio. If the total number of attempts
 									is \(S + F = N\), then the <em>average</em> or <em>expected</em> growth ratio, \(\bar{G}\), can be 
 									calculated by taking the Nth root of the formula for growth rate divided by the initial amount.
 									So for this bet that would be:
 									\[\bar{G}={\Big(\frac{100{(1.6)}^{S}{(0.5)}^{F}}{100}\Big)}^{\frac{1}{N}} = {(1.6)}^{\frac{S}{N}} {(0.5)}^{\frac{F}{N}} = {(1.6)}^{s} {(0.5)}^{f}\]
 
 									Here \(s\) and \(f\) are the rates of success and failure. We can then calculate that
-									the expected growth ratio for betting half of what you have left on the incredible +120 coinflip is:
+									the expected growth ratio for betting half of what you have left on the incredible +120 coin flip is:
 									\[{(1.6)}^{0.5} {(0.5)}^{0.5} = 0.894\] 
 									
 									which translates to a  growth rate of <b>-10.6%</b> per bet.
-									This is terrible. For context, the stock market growth rate is about <em>positive</em> 10% annually.
+									This is terrible. For context, the stock market growth rate is roughly <em>positive</em> 10% annually.
 									But we don't even have to worry about how high the growth rate is, because right now it's negative!
 									<br>&nbsp;<br>&nbsp;<br>
 
 									Okay, so even though this bet should be really good, betting half of our bankroll each 
 									time lost us money in the long run. So, what if we bet only 5 percent?
-									First, let's calculate the ratio's. With +120, if you were to bet a 5 percent, the ratio for a success, \({R}_{s}\),
+									First, let's calculate the ratios. With +120, if you were to bet a 5 percent, the ratio for a success, \({R}_{s}\),
 									and failure, \({R}_{f}\), would be: \[{R}_{s} = 0.95 + (0.05 + (1.2)0.05) = 1.06\] \[{R}_{f} = 0.95 + 0 = 0.95\]
 
 									In general, if we let \(R\) be the rate of return and \(p\) be the proportion that we bet, 
-									then those ratio's would be: \[{R}_{s} = (1-p) + (p + (R)p) = 1 + (R)p\] \[{R}_{f} = (1-p) + 0 = 1-p\]
+									then those ratios would be: \[{R}_{s} = (1-p) + (p + (R)p) = 1 + (R)p\] \[{R}_{f} = (1-p) + 0 = 1-p\]
 
 									Back to our example, if we plug in our ratios and success/failure rates, we find that: 
 									\[{(1.06)}^{0.5} {(0.95)}^{0.5} = 1.0035\]
 									
 									A positive growth rate! A 0.35% growth rate to be precise. This is wonderful!
 									Now we finally have a way of taking advantage of the plus EV bet.
-									And in this hypothetical we can bet an infinite amount of times, 
-									so as long as the growth is positive, we will be able to infinitely grow our money!
+									And in this hypothetical we can bet an infinite amount of times. Therefore, 
+									as long as the growth is positive, we will be able to infinitely grow our money!
 									<br>&nbsp;<br>&nbsp;<br>
 
-									But, this is the real world. So what can we learn from this hypothetical?
+									However, this is the real world. What can we learn from this hypothetical?
 									Expected growth rate is different than Expected Value, and, if we assume that
 									we are not adding money to our initial bankroll, we want to maximize our
 									expected growth rate for every bet that we make so that, in aggregate, 
@@ -192,7 +192,7 @@
 									\[\bar{G} = {(1 + (R)p)}^{s} {(1-p)}^{f}\]
 									Using calculus, we can take the derivative of that equation with respect to p, 
 									set it equal to 0, and solve for p. The resulting equation will tell us the proportion
-									of our bank roll that we should bet: \[p = s  - \frac{f}{R}\]
+									of our bankroll that we should bet: \[p = s  - \frac{f}{R}\]
 
 									This equation is so simple! Now we can plug in the values that we have to find that,
 									for this hypothetical, the optimal proportion is: \[p = 0.5  - \frac{0.5}{1.2} = \frac{1}{12}\]
@@ -204,8 +204,9 @@
 									This is a 0.42% growth rate. This may seem only a little bit better than the 0.35% from before, but, 
 									because growth is exponential, even this small difference will compound quickly. 
 									<br>
-									So, if we came across a bet with the numbers from the hypothetical, where we think there is a 50% chance that 
-									team A wins, and their moneyline is +120, we know that we should bet 1/12 of our
+									So, if we came across a bet with the numbers from the hypothetical, where we think 
+									there is a 50% chance that team A wins, and their moneyline (betting odds for them 
+									winning) is +120, we know that we should bet 1/12 of our
 									bankroll in order to best take advantage of it. Granted, the hard part is 
 									actually knowing what the probabilities are or even finding bets that you think are 
 									plus EV (they must be plus EV to have a positive maximum growth rate). But now you
@@ -225,9 +226,11 @@
 									<br>&nbsp;<br>&nbsp;<br>
 
 									I will start with a situation that you might want to bet on, but is probably not
-									an optimal use of your bankroll: futures. Futures are usually season long bets 
-									where there are more than two possible winners.
-									I do not recommend betting on futures for multiple reasons:
+									an optimal use of your bankroll: futures. Futures are usually season-long bets 
+									where there are more than two possible winners. For example, you can bet on which 
+									player will end up being voted the MVP of the season and you can bet on multiple 
+									different players. Betting futures may be fun, but I do not recommend betting 
+									them if you are just trying to increase your bankroll for multiple reasons:
 									<ul style="margin:-2em;"></ul>
 									<li>Only getting to compound your winnings once per year means that your edge 
 									would need to be over 20 times better than betting once per weekend
@@ -235,17 +238,18 @@
 									<li>If your model is inaccurate and what you think are the true probabilities 
 									are actually wrong, it would take a long time to realize that and fix it.</li>
 									<li>And, even if your model is right, this method uses the law of large numbers. 
-									So there is a decent chance that you just get unlucky on your first 10 bets, 
-									which in the long run won't matter, but when those 10 bets take 10 years,
-									you might not be around long enough to reach the 'large numbers' part of the law of large numbers.</li>
+									So there is a decent chance that you just get unlucky on your first 10 bets, which 
+									in the long run won't matter, but when those 10 bets take 10 years, you might not be 
+									around long enough to reach the 'large numbers' part of the law of large numbers.</li>
 									</ul>
 									<br>
 									So why do I even bring up futures? First, I wanted to warn you that they are more for 
-									fun than for growing your bankroll, second, some of you will bet on them anyway,
-									and third, the formula used to optimize those bets will be very illustrative.
+									fun than for growing your bankroll. Second, some of you will bet on them anyway.
+									Third, the formula used to optimize those bets will be very illustrative.
 									<br>
-									So, how do we build a formula for expected growth ratio when you can bet on 
-									multiple potential winners for the same event? Let's start by saying that we have these inputs
+									So, how do we build a formula for expected growth ratio when you can bet on multiple 
+									potential winners for the same event? Let's use the example of betting on which player 
+									will win MVP at the end of the year. We can start by saying that we have these inputs
 									for who is going to win MVP. They are based on combining players from the actual 
 									2020 MVP race and using <a href="https://www.pff.com/betting">PFF</a>'s predictions
 									for the 'True' probabilities.
@@ -306,9 +310,9 @@
 									probability than their implied probability, so we think that betting on them can produce 
 									a positive growth rate. Expected Value Ratio is the Expected Value of betting $1 and 
 									quantifies the difference between true probability and implied probability. Note that
-									the ratio is greater than 1 when the true probabiity is higher than the implied probability.
+									the ratio is greater than 1 when the true probability is higher than the implied probability.
 									<br>
-									Lets set up an equation, like we did for the coinflip, for beting on
+									Let's set up an equation, like we did for the coin flip, for betting on
 									player 1. Since we are treating it as if there are only two outcomes (player 1 wins
 									MVP or they don't) we can use the same formula we used before.
 									\[\bar{G} = {(1 + (R)p)}^{s} {(1-p)}^{f} = {(1 + 7p)}^{0.233} {(1-p)}^{1-0.233}\]
@@ -317,7 +321,7 @@
 									the optimal betting proportion and the resulting growth ratio. If you want to see
 									how I run these calculations in a Google Colab notebook, click <a href="https://colab.research.google.com/drive/166p9rjJYUYKhTsPa9afqVQr4y2OCH9-I?usp=sharing">here</a>.
 									For this player, the optimal betting proportion is 0.123 and the resulting growth ratio
-									is 1.045 or a 4.5% growth rate. Lets do this again for each of the other players and 
+									is 1.045 or a 4.5% growth rate. Let's do this again for each of the other players and 
 									add it all to the table.
 									<br>
 									<table>
@@ -380,10 +384,10 @@
 									Since the last three players had Expected Value Ratios less than 1, there is no
 									proportion that yields a positive growth rate.
 									<br>
-									Now on to the new equation. Let's set up an equation to bet different proporitons on 
+									Now, on to the new equation. Let's set up an equation to bet different proportions on 
 									players A and B at the same time. The general formulation for average growth rate is 
 									the ratio of the payout of an outcome to the power of the probability that the outcome
-									happens. So, for this situatino, the equation looks like this: 
+									happens. So, for this situation, the equation looks like this: 
 									\[\bar{G} = {(1 + {R}_{1}{p}_{1} - {p}_{2})}^{{s}_{1}} {(1 - {p}_{1} + {R}_{2}{p}_{2})}^{{s}_{2}} {(1-{p}_{1}-{p}_{2})}^{f}\]
 									\[ = {(1 + 7{p}_{1} - {p}_{2})}^{0.233} {(1 - {p}_{1} + 1.7{p}_{2})}^{0.454} {(1-{p}_{1}-{p}_{2})}^{1-0.233-0.454}\]
 
@@ -410,14 +414,14 @@
 									but it is higher, which means that this approach allows us to find value even in 
 									negative EV bets!
 									<br>
-									So what if we also add in Player D to the maximization algorithm? 
+									So what if we also add Player D to the maximization algorithm? 
 									Their betting proportion is 0 and the rest of the
 									values are the same as above. So this can only go so far, but we went from a 4.5%
 									growth rate per bet when just betting on Player A, to a 9.4% growth rate when also 
 									betting on Players B and C, even though they are worse bets and one of them is 
 									negative EV! To remind you, these are based on real betting lines and predictions.
-									Granted, we shouldn't be too confident in our 'true' probabilities, and don't forget
-									to heed my warnings about futures, but this seems very promising. 
+									However, we need to remember not to be too confident in our 'true' probabilities.
+									And, don't forget to heed my warnings about futures. Still, this seems very promising! 
 									<br>&nbsp;<br>&nbsp;<br>
 									
 									Now that we've messed around with the formula a bit, let's write out a generic version.
@@ -441,11 +445,11 @@
 									and you lose both bets. The formula for this is:
 									\[G = {(1 + {R}_{1}{p}_{1} + {R}_{2}{p}_{2})}^{{s}_{1}{s}_{2}} {(1 + {R}_{1}{p}_{1} - {p}_{2})}^{{s}_{1}{f}_{2}} {(1 - {p}_{1} + {R}_{2}{p}_{2})}^{{f}_{1}{s}_{2}} {(1 - {p}_{1} - {p}_{2})}^{{f}_{1}{f}_{2}} \]
 
-									To once again use realistic numbers, lets say that the moneyline for the team we
-									like in game 1 is +120 which has an implied probability of 0.455 and we think the 
-									true probability is 0.47 which is a 1.5% edge. For game 2 lets have the 
-									moneyline be -120 which has an implied probability of 0.545 and we think the true 
-									probability is 0.57 which is a 2.5% edge. Using the maximization algorithm in the <a href="https://colab.research.google.com/drive/166p9rjJYUYKhTsPa9afqVQr4y2OCH9-I?usp=sharing">Google Colab notebook</a>,
+									To once again use realistic numbers, let's say that the moneyline for the team we
+									like in game 1 is +120 (which has an implied probability of 0.455) and lets say that 
+									we think the true probability is 0.47 (which is a 1.5% edge). For game 2, let's have the 
+									moneyline be -120 (an implied probability of 0.545) and we think the true 
+									probability is 0.57 (a 2.5% edge). Using the maximization algorithm in the <a href="https://colab.research.google.com/drive/166p9rjJYUYKhTsPa9afqVQr4y2OCH9-I?usp=sharing">Google Colab notebook</a>,
 									we get the result for betting on each game individually. Those results are in the table below. 
 									<br>
 									<table>
@@ -488,13 +492,13 @@
 									to bet optimally on multiple concurrent games and get a growth rate of <b>0.17%</b>.
 									In this case, the amount that we should bet on each game is actually the same 
 									whether we look at betting both or just one. Experimentally, I have found that this 
-									remains approximately accurate, unless the edges are much bigger or we are betting on many more games.
+									remains approximately accurate unless the edges are much bigger or we are betting on many more games.
 									<br>&nbsp;<br>&nbsp;<br>
 
 									Now that we have gone through all of the theory, let's see what happens when we try to 
 									bet on all of the NFL games on a Sunday.
 									First, we only want to bet on games that we think are plus EV so that we can have 
-									a positive growth rate. Let's say that on an average, we think that there are 
+									a positive growth rate. Let's say that, on average, we think that there are 
 									4 games that are plus EV. I will create some realistic numbers for these and two
 									games that are negative EV so that we can plug them into the maximization algorithm and see
 									what we get.
@@ -566,19 +570,19 @@
 									</table>
 
 									So now we have our numbers, we just need to get the right formula. We can do exactly
-									what we did for two games, but for 6. If you are not intereseted in the fine details 
+									what we did for two games, but for 6. If you are not interested in the fine details 
 									of how to solve this, feel free to go to the results that are after the next table.
 									<br>
 									The outcomes will be defined the same as before: every combination of wins and 
 									losses for all of the games. So with 6 games, that will give us \({2}^{6}=32\)
-									combinations. For each of these combinations, the the multiplier an outcome will have 
+									combinations. For each of these combinations, the multiplier an outcome will have 
 									on your bankroll is 1 plus the amount gained from each bet won, minus each bet 
 									lost. And the multiplier for each outcome will be to the power of the likelihood of 
 									that outcome. For especially fancy models, the outcome of the individual games could be correlated, which 
 									could give us even more of an edge. (For example, if Team 1 barely beats Team 2
 									in the previous week, your model might think the strengths of those two teams are 
 									similar. Therefore, if team 1 beats a good team this week, this fancy model would know 
-									that team 2 should now have a greater chance to win this week as well.) But for now, lets assume that 
+									that team 2 should now have a greater chance to win this week as well.) But for now, let's assume that 
 									the outcomes of each game don't affect the probabilities of the other games so we 
 									can just multiply the liklihoods of each game outcome together to get the overall 
 									likelihood of that combination of wins and losses.
@@ -667,29 +671,29 @@
 									<br>
 									Also notice that, once again, the optimal betting proportions for 
 									games 1 and 2 are the same whether betting on all of the games or just betting on them individually.
-									I have found this to be generally true when betting on seperate concurrent events.
+									I have found this to be generally true when betting on separate concurrent events.
 									This means that, instead of needing to use the complicated algorithm, as long as you assume the 
 									outcomes of the games are uncorrelated, you can determine how much to bet on each game using 
 									the simple formula that we found before: \[p = s  - \frac{f}{R} = s  - \frac{1 - s}{R}\]
 
 									As long as you know the true probability, you can now determine your optimal betting 
-									proportion with one simlple calculation! 
+									proportion with one simple calculation! 
 
 									But I haven't yet told you what the resulting growth rate is when you bet with all of 
-									the above proportions. Well wait no longer, betting these proportions will get us an 
-									average growth rate of <b>0.49%</b>! Wait,
-									less than 1 percent growth rate, isn't that terrible? Well, the thing about growth
+									the above proportions. Well, wait no longer. Betting these proportions will get us an 
+									average growth rate of <b>0.49%</b>! Wait... 
+									less than 1 percent growth rate? Isn't that terrible? Well, the thing about growth
 									rates is that they compound. This is our average growth per weekend. if we want to know what our
-									growth rate is after the 18 game season, not including playoffs, we need to multiply 
+									growth rate is after the 18-game season, not including playoffs, we need to multiply 
 									the growth ratio by itself 18 times. Doing this brings our season growth ratio to 
 									\({1.0049}^{18}=1.093\) or a <b>9.3%</b> growth rate! That is almost as much as the 
 									stock market averages in 52 weeks, and we did it in only 18! And maybe you have more or better edges 
 									or you also bet on player props, or you also bet during the playoffs, 
-									or you also bet other sports. Your time investment could actually be worth it!
+									or you also bet on other sports. Your time investment could actually be worth it!
 									<br>
 									Here is where I give the disclaimer that we don't actually know the 'true' probabilities, 
 									so we can't be too confident. But if you are already betting, you must already think 
-									that you know the true probability better than the market, at least in some circumstances.
+									that you know the true probabilities better than the market, at least in some circumstances.
 									So, as long as you can quantify what you think the true probability is you can just plug it 
 									into this equation \[p = s  - \frac{1 - s}{R}\] 
 
