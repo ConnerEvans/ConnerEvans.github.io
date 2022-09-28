@@ -363,10 +363,10 @@ for (i in 1:nrow(EPApD_season)) {
 }
 colnames(plot_data) = c("x","y","id","season","team")
 
-x_min = min(filter(plot_data,id==0)$x)
-y_min = min(filter(plot_data,id==0)$y)
-x_range = max(filter(plot_data,id==0)$x) - x_min
-y_range = max(filter(plot_data,id==0)$y) - y_min
+x_min = min(plot_data$x)
+y_min = min(plot_data$y)
+x_range = max(plot_data$x) - x_min
+y_range = max(plot_data$y) - y_min
 x_center = x_min + x_range/2
 y_center = y_min + y_range/2
 range = if_else(x_range>y_range,x_range,y_range)*1.001
